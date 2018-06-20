@@ -45,16 +45,16 @@ public class Solution {
 
 
     }
-    static class Verteks implements Comparable<Verteks> {
+    static class Vertex implements Comparable<Vertex> {
         int vertex;
         int cost;
 
-        Verteks(int v,int c){
+        Vertex(int v,int c){
             vertex =v;
             cost = c;
         }
 
-        public int compareTo(Verteks e ){
+        public int compareTo(Vertex e ){
             if(cost>e.cost) return 1;
             if(cost<e.cost) return -1;
             return 0;
@@ -73,16 +73,16 @@ public class Solution {
     // Complete the leastTimeToInterview function below.
     static long leastTimeToInterview(Graph G, int n, int k, int m) {
 
-        PriorityQueue<Verteks> queue = new PriorityQueue<Verteks>();
+        PriorityQueue<Vertex> queue = new PriorityQueue<Vertex>();
         int[] cost = new int[n];
         for(int i=0;i<n;i++){
             cost[i] = 1000;
         }
         cost[0] = 0;
         int[] visited = new int[n];
-        queue.add(new Verteks(0,0));
+        queue.add(new Vertex(0,0));
         while(!queue.isEmpty()){
-            Verteks  uv = queue.poll();
+            Vertex  uv = queue.poll();
             int  u = uv.vertex;
             if(visited[u]==0){
                 visited[u]=1;
@@ -93,7 +93,7 @@ public class Solution {
                     if(!e.used && cost[w]>calculateCost(k,cost[u],e.cost)){
                         e.used = true;
                         int newCost = calculateCost(k,cost[u],e.cost);
-                        queue.add(new Verteks(w,newCost));
+                        queue.add(new Vertex(w,newCost));
                     }
                 }
             }
@@ -136,6 +136,7 @@ public class Solution {
         
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
+
         bufferedWriter.close();
         
         scanner.close();
